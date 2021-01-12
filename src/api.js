@@ -27,4 +27,7 @@ const newGames = `games?key=${apiKey}&dates=${lastYear},${currentDate}&ordering=
 export const popularGamesUrl = () => `${baseUrl}/${popularGames}`;
 export const upcomingGamesUrl = () => `${baseUrl}/${upcomingGames}`;
 export const newGamesUrl = () => `${baseUrl}/${newGames}`;
+//game details
 export const gameDetailsUrl = (gameId) => `${baseUrl}/games/${gameId}`;
+//game screenshots https://api.rawg.io/api/games/{game_pk}/screenshots
+export const gameScreenShotsUrl = (gameId) => `${baseUrl}/games/${gameId}/screenshots`;

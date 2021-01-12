@@ -1,59 +1,71 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadGames } from '../actions/gamesActions';
 //css and animations
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 //components
 import Game from '../components/Game';
+import GameDetail from '../components/GameDetail';
+//context api
+import { useLocation } from 'react-router-dom';
 
 
-function Home() {
-	const dispatch = useDispatch();
-
+const Home = () => {
+   
+   const location = useLocation().pathname;
+   const path = location.split('/')[2];
+   //let pathId = path? parseInt(path) : 0;
+   
+   
+   const dispatch = useDispatch();
    //get data
    useEffect(() => {
 		dispatch(loadGames());
    }, [dispatch]);
 
+   //ver o no los detalles del juego
+   //const [showDetail, setShowDetail] = useState(false);
 
    //show the data
    const { newGames, popular, upcoming} = useSelector(state => state.games);
-   //console.log(newGames, popular, upcoming);
-   
+
 	return (
 		<div>
          <StGameList>
-            <h2>Upcoming Games</h2>
-			   <StGames>
-               {upcoming.map(game => {
-                  return <Game key={game.id} 
-                           name={game.name} 
-                           released={game.released} 
-                           id={game.id} 
-                           image={game.background_image}/>
-               })}
-            </StGames>
-            <h2>Popular Games</h2>
-			   <StGames>
-               {popular.map(game => {
-                  return <Game key={game.id} 
-                           name={game.name} 
-                           released={game.released} 
-                           id={game.id} 
-                           image={game.background_image}/>
-               })}
-            </StGames>
-            <h2>New Games</h2>
-			   <StGames>
-               {newGames.map(game => {
-                  return <Game key={game.id} 
-                           name={game.name} 
-                           released={game.released} 
-                           id={game.id} 
-                           image={game.background_image}/>
-               })}
-            </StGames>
+            <AnimateSharedLayout type="crossfade">
+               <AnimatePresence>{path && <GameDetail pathId={path}/>}</AnimatePresence>
+               <h2>Upcoming Games</h2>
+               <StGames>
+                  {upcoming.map(game => {
+                     return <Game key={game.id} 
+                              name={game.name} 
+                              released={game.released} 
+                              id={game.id} 
+                              image={game.background_image}/>
+                  })}
+               </StGames>
+               <h2>Popular Games</h2>
+               <StGames>
+                  {popular.map(game => {
+                     return <Game key={game.id} 
+                              name={game.name} 
+                              released={game.released} 
+                              id={game.id} 
+                              image={game.background_image}/>
+                  })}
+               </StGames>
+               <h2>New Games</h2>
+               <StGames>
+                  {newGames.map(game => {
+                     return <Game key={game.id} 
+                              name={game.name} 
+                              released={game.released} 
+                              id={game.id} 
+                              image={game.background_image}/>
+                  })}
+               </StGames>
+            </AnimateSharedLayout>
          </StGameList>
 		</div>
 	);

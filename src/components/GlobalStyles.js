@@ -11,7 +11,11 @@ const GlobalStyles = createGlobalStyle`
          width: 0.5rem;
       }
       &::-webkit-scrollbar-thumb{
-         background-color: darkgray;
+         background-color: darkgrey;
+      }
+      
+      &::-webkit-scrollbar-track {
+         background: white;
       }
    }
 
@@ -28,9 +32,9 @@ const GlobalStyles = createGlobalStyle`
    }
 
    h3{
-      font-size: 1.3 rem;
+      font-size: 1.4 rem;
       color:#333;
-      padding: 1rem;
+      padding: 1rem 0rem;
    }
    
    p{
@@ -42,6 +46,10 @@ const GlobalStyles = createGlobalStyle`
    a{
       text-decoration: none;
       color: #333;
+   }
+
+   img {
+      display: block;
    }
 
 `;

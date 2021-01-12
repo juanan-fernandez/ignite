@@ -1,11 +1,21 @@
 const initState = {
-   game: {}
+   game: {},
+   screenshots: [],
+   isLoading: true
 }
 
 const detailsReducer = ((state = initState, action) => {
    switch(action.type) {
       case 'GET_DETAIL':
-         return {...action.payload.game};
+         return {...state, 
+                  game: action.payload.game, 
+                  screenshots: action.payload.screens,
+                  isLoading: false
+               };
+      case 'LOADING_DETAIL':
+         return {...state,
+                  isLoading: true
+               }
       default:
          return {...state};
    }

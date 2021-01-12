@@ -1,6 +1,7 @@
 import React from 'react';
 import GlobalStyles from './components/GlobalStyles';
 import Home from './pages/Home';
+import { Route } from 'react-router-dom';
 
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
 	return (
 		<div>
 			<GlobalStyles/>
-			<Home/>
+			<Route path={['/game/:id', '/']}>
+				<Home/>
+			</Route>
 		</div>
 	);
 }
