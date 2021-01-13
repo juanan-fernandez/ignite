@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import logo from '../img/logo.svg';
+import { fadeIn } from '../animations';
 
 const Nav = () => {
    
@@ -28,7 +29,7 @@ const Nav = () => {
    }
 
 	return (
-		<StNav>
+		<StNav variants={fadeIn} initial='hidden' animate='show'>
 			<StLogo onClick={resetSearch}>
 				<img src={logo} alt='Logo' />
 				<h1>Ignite</h1>

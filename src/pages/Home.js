@@ -4,6 +4,7 @@ import { loadGames } from '../actions/gamesActions';
 //css and animations
 import styled from 'styled-components';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { fadeIn } from '../animations';
 //components
 import Game from '../components/Game';
 import GameDetail from '../components/GameDetail';
@@ -33,7 +34,7 @@ const Home = () => {
       return (
          <div>
             <StGameList>
-               <AnimateSharedLayout type="crossfade">
+               <AnimateSharedLayout type='crossfade'>
                   <AnimatePresence>{path && <GameDetail pathId={path}/>}</AnimatePresence>
                   <h2>Searching Results</h2>
                   <StGames>

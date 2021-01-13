@@ -4,30 +4,40 @@ import { loadGameDetails } from '../actions/detailActions';
 //css & animations
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { popup } from '../animations';
 //router
 import { Link, useLocation } from 'react-router-dom';
 //util
 import { getSmallImage } from '../util';
 
 const Game = ({ name, released, id, image }) => {
-	
 	const location = useLocation().pathname;
-   const path = location.split('/')[2];
+	const path = location.split('/')[2];
 	const dispatch = useDispatch();
 
 	const getGameDetails = (idGame) => {
-		if(!path) {
+		if (!path) {
 			document.body.style.overflow = 'hidden';
 			dispatch(loadGameDetails(idGame));
-		}	
+		}
 	};
 
 	return (
-		<StGame layoutId={id.toString()} onClick={() => getGameDetails(id)}>
+		<StGame
+			variants={popup}
+			initial='hidden'
+			animate='show'
+			layoutId={id.toString()}
+			onClick={() => getGameDetails(id)}
+		>
 			<Link to={`/game/${id}`}>
 				<motion.h3 layoutId={`title ${id.toString()}`}>{name}</motion.h3>
 				<p>{released}</p>
-				<motion.img layoutId={`image ${id.toString()}`} src={getSmallImage(image, 640)} alt={name} />
+				<motion.img
+					layoutId={`image ${id.toString()}`}
+					src={getSmallImage(image, 640)}
+					alt={name}
+				/>
 			</Link>
 		</StGame>
 	);
