@@ -16,8 +16,7 @@ const Home = () => {
    const location = useLocation().pathname;
    const path = location.split('/')[2];
    //let pathId = path? parseInt(path) : 0;
-   
-   
+     
    const dispatch = useDispatch();
    //get data
    useEffect(() => {
@@ -28,51 +27,73 @@ const Home = () => {
    //const [showDetail, setShowDetail] = useState(false);
 
    //show the data
-   const { newGames, popular, upcoming} = useSelector(state => state.games);
+   const { newGames, popular, upcoming, searched} = useSelector(state => state.games);
 
-	return (
-		<div>
-         <StGameList>
-            <AnimateSharedLayout type="crossfade">
-               <AnimatePresence>{path && <GameDetail pathId={path}/>}</AnimatePresence>
-               <h2>Upcoming Games</h2>
-               <StGames>
-                  {upcoming.map(game => {
-                     return <Game key={game.id} 
-                              name={game.name} 
-                              released={game.released} 
-                              id={game.id} 
-                              image={game.background_image}/>
-                  })}
-               </StGames>
-               <h2>Popular Games</h2>
-               <StGames>
-                  {popular.map(game => {
-                     return <Game key={game.id} 
-                              name={game.name} 
-                              released={game.released} 
-                              id={game.id} 
-                              image={game.background_image}/>
-                  })}
-               </StGames>
-               <h2>New Games</h2>
-               <StGames>
-                  {newGames.map(game => {
-                     return <Game key={game.id} 
-                              name={game.name} 
-                              released={game.released} 
-                              id={game.id} 
-                              image={game.background_image}/>
-                  })}
-               </StGames>
-            </AnimateSharedLayout>
-         </StGameList>
-		</div>
-	);
+   if(searched.length>0) {
+      return (
+         <div>
+            <StGameList>
+               <AnimateSharedLayout type="crossfade">
+                  <AnimatePresence>{path && <GameDetail pathId={path}/>}</AnimatePresence>
+                  <h2>Searching Results</h2>
+                  <StGames>
+                     {searched.map(game => {
+                        return <Game key={game.id} 
+                                 name={game.name} 
+                                 released={game.released} 
+                                 id={game.id} 
+                                 image={game.background_image}/>
+                     })}
+                  </StGames>
+               </AnimateSharedLayout>
+            </StGameList>
+         </div> 
+      )
+   }else {
+      return (
+         <div>
+            <StGameList>
+               <AnimateSharedLayout type="crossfade">
+                  <AnimatePresence>{path && <GameDetail pathId={path}/>}</AnimatePresence>
+                  <h2>Upcoming Games</h2>
+                  <StGames>
+                     {upcoming.map(game => {
+                        return <Game key={game.id} 
+                                 name={game.name} 
+                                 released={game.released} 
+                                 id={game.id} 
+                                 image={game.background_image}/>
+                     })}
+                  </StGames>
+                  <h2>Popular Games</h2>
+                  <StGames>
+                     {popular.map(game => {
+                        return <Game key={game.id} 
+                                 name={game.name} 
+                                 released={game.released} 
+                                 id={game.id} 
+                                 image={game.background_image}/>
+                     })}
+                  </StGames>
+                  <h2>New Games</h2>
+                  <StGames>
+                     {newGames.map(game => {
+                        return <Game key={game.id} 
+                                 name={game.name} 
+                                 released={game.released} 
+                                 id={game.id} 
+                                 image={game.background_image}/>
+                     })}
+                  </StGames>
+               </AnimateSharedLayout>
+            </StGameList>
+         </div>
+      );
+   }
 }
 
 const StGameList = styled(motion.div)`
-   padding: 0rem 5rem;
+   padding: 0rem 5rem 3rem 5rem;
    h2 {
       padding: 5rem 0rem;
    }

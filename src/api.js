@@ -31,3 +31,6 @@ export const newGamesUrl = () => `${baseUrl}/${newGames}`;
 export const gameDetailsUrl = (gameId) => `${baseUrl}/games/${gameId}`;
 //game screenshots https://api.rawg.io/api/games/{game_pk}/screenshots
 export const gameScreenShotsUrl = (gameId) => `${baseUrl}/games/${gameId}/screenshots`;
+//search game
+export const searchGameUrl = (gameName) =>
+	`${baseUrl}/games?key=${apiKey}&search=${gameName}&ordering=ratingd&page_size=10`;
